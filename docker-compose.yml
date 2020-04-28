@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  php:
+    build: ./.docker
+    restart: always
+    working_dir: /php
+    volumes:
+      - .:/php
+      - ./.docker/xdebug/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    command: tail -f /dev/null
+    environment:
+      XDEBUG_HOST_SETTING: host.docker.internal
+      PHP_IDE_CONFIG: "serverName=localhost"
+    labels:
+      - "traefik.enable=true"
+    networks:
+      traefik:
+
+volumes:
+  phpstorm_helpers:
+
+networks:
+  traefik:
