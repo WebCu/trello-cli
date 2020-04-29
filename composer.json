@@ -1,9 +1,17 @@
 {
+    "authors": [
+        {"name": "Jorge Gonzalez (Webcu)"}
+    ],
     "require": {
         "symfony/dom-crawler": "^5.0",
         "symfony/http-client": "^5.0",
         "symfony/css-selector": "^5.0",
         "symfony/dotenv": "^5.0",
         "symfony/console": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Trello\\CLI\\": "src/"
+        }
     }
 }
