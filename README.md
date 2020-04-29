@@ -1,47 +1,30 @@
-The first thing was create the tag to easily navigate
-between the different stages of the POC.
+# TRELLO CLI
+A CLI to handle repetitive tasks in Trello.
 
-https://www.jetbrains.com/help/phpstorm/2020.1/use-tags-to-mark-specific-commits.html
+## Installation
+- After have cloned the repo. Go to the folder where the 
+project was clone and start the php container:
 
-These are the default values of the Symfony Console
-environment variables 
-#### Symfony Console
-APP_ENV=dev
-APP_DEBUG=1
+    `docker-compose up -d`
 
-Add namespace and author to composer.json
-"authors": [
-        {"name": "Jorge Gonzalez (Webcu)"}
-    ],
+- Go inside the container:
 
-"autoload": {
-        "psr-4": {
-            "Trello\\CLI\\": "src/"
-        }
-    }
+    `docker-compose exec php bash`
     
+- Install the dependencies:
+
+    `composer install`
     
-https://symfony.com/doc/current/components/console/helpers/questionhelper.html#let-the-user-choose-from-a-list-of-answers
+## Configuration
+Make a copy of .env.dist and named it .env. Add to the
+.env file your Trello's API and Toke. You can find information
+about how to get that info in this guide:
+    
+## Working with the CLI
+All this commands must be executed inside of the 
+container.
+ 
+- Create a card with a checklist where the check items
+are links extracted from a web page.
 
-Add the composer.lock to the repo to avoid problems in
-the future because of new versions of the library that
-we use.
-
-Deciding between single quotes or double quotes:
-Like I used a lot of variable interpolation I prefer
-use double quotes
-
-Creation of services 
-Pass them to the command like arguments to be easily
-Interchangeable.
-
-HttpClient can have a wrapper? 
-Yes, query string parameters 
-
-Add phpcs
-Install it
-`composer require --dev friendsofphp/php-cs-fixer`
-Use it
-`php vendor/bin/php-cs-fixer fix src/`
-or
-`./vendor/bin/php-cs-fixer fix src/`
+`php index.php trello-cli:create-link-card` 
