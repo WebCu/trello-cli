@@ -17,14 +17,13 @@ class TrelloApi
             "token" => $token,
         ];
     }
-
-    // Todo Select the active boards only (Active != Archived)
+    
     public function getTrelloBoards(): array
     {
         $response = $this->httpClient->request(
             "GET",
             "https://api.trello.com/1/members/me/boards",
-            ["query" => array_merge($this->defaultQuery, ['fields' => 'name'])]
+            ["query" => array_merge($this->defaultQuery, ["fields" => "name", "filter" => "open"])]
         );
 
         return array_column($response->toArray(), null, "name");
@@ -35,7 +34,7 @@ class TrelloApi
         $response = $this->httpClient->request(
             "GET",
             "https://api.trello.com/1/boards/{$boardId}/lists",
-            ["query" => array_merge($this->defaultQuery, ['fields' => 'name'])]
+            ["query" => array_merge($this->defaultQuery, ["fields" => "name"])]
         );
 
         return array_column($response->toArray(), null, "name");

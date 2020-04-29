@@ -2,3 +2,4 @@
 .idea
 .env
 /.php_cs.cache
+/notes.md
