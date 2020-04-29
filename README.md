@@ -29,4 +29,11 @@ we use.
 
 Deciding between single quotes or double quotes:
 Like I used a lot of variable interpolation I prefer
-use double quotes 
+use double quotes
+
+Creation of services 
+Pass them to the command like arguments to be easily
+Interchangeable.
+
+HttpClient can have a wrapper? 
+Yes, query string parameters 
