@@ -60,7 +60,7 @@ class TrelloApi
         $response = $this->httpClient->request(
             "POST",
             "https://api.trello.com/1/checklists",
-            ["query" => array_merge($this->defaultQuery, ['idCard' => $idCard])]
+            ["query" => array_merge($this->defaultQuery, ["idCard" => $idCard])]
         );
 
         return $response->toArray();
@@ -73,7 +73,7 @@ class TrelloApi
             "https://api.trello.com/1/checklists/{$idChecklist}/checkItems",
             [
                 "body" => ["name" => "[{$text}]({$href})"],
-                "query" => array_merge($this->defaultQuery, ['fields' => 'name'])
+                "query" => array_merge($this->defaultQuery, ["fields" => "name"])
             ]
         );
     }

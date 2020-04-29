@@ -9,14 +9,14 @@ use Trello\CLI\Command\CreateLinkCardCommand;
 use Trello\CLI\Service\TrelloApi;
 use Trello\CLI\Service\WebCrawler;
 
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__.'/vendor/autoload.php';
 
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__ . "/.env");
+$dotenv->load(__DIR__.'/.env');
 
 $httpClient = HttpClient::create();
 
-$trelloApi = new TrelloApi($httpClient, $_ENV["TRELLO_API_KEY"], $_ENV["TRELLO_API_TOKEN"]);
+$trelloApi = new TrelloApi($httpClient, $_ENV['TRELLO_API_KEY'], $_ENV['TRELLO_API_TOKEN']);
 $webCrawler = new WebCrawler($httpClient);
 
 $application = new Application();

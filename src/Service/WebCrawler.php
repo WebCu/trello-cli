@@ -27,15 +27,15 @@ class WebCrawler
 
             return array_filter(
                 $crawler->filter($selector . " a")->each(
-                    fn(Crawler $aCrawler) => [
+                    fn (Crawler $aCrawler) => [
                         "text" => $aCrawler->text(),
                         "href" => $aCrawler->attr("href")
                     ]
                 ),
-                fn(array $link) => !empty($link["href"])
+                fn (array $link) => !empty($link["href"])
             );
         } catch (Exception $exception) {
-            echo "An error happened: ".$exception->getMessage();
+            echo "An error happened: " . $exception->getMessage();
 
             return [];
         }

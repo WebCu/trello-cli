@@ -37,3 +37,11 @@ Interchangeable.
 
 HttpClient can have a wrapper? 
 Yes, query string parameters 
+
+Add phpcs
+Install it
+`composer require --dev friendsofphp/php-cs-fixer`
+Use it
+`php vendor/bin/php-cs-fixer fix src/`
+or
+`./vendor/bin/php-cs-fixer fix src/`

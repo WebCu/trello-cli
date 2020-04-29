@@ -35,10 +35,10 @@ class CreateLinkCardCommand extends Command
     protected function configure()
     {
         $this->setDescription("Creates a new Trello card with a checklist")
-            ->setHelp("
-                This command allows create a new Trello card with a checklist filled
-                with links extracted from a given web page.
-            ");
+            ->setHelp(
+                "This command allows create a new Trello card with a checklist
+                 filled with links extracted from a given web page."
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -55,7 +55,7 @@ class CreateLinkCardCommand extends Command
         $question->setErrorMessage("Board %s is invalid.");
 
         $boardName = $helper->ask($input, $output, $question);
-        $output->writeln("You have just selected: ".$boardName);
+        $output->writeln("You have just selected: " . $boardName);
         ### End Select board ###
 
         ### Select List ###
@@ -68,7 +68,7 @@ class CreateLinkCardCommand extends Command
         $question->setErrorMessage("List %s is invalid.");
 
         $listName = $helper->ask($input, $output, $question);
-        $output->writeln("You have just selected: ".$listName);
+        $output->writeln("You have just selected: " . $listName);
         ### End Select List ###
 
         ### Set the name of the new card ###
@@ -77,18 +77,26 @@ class CreateLinkCardCommand extends Command
         ### End Set the name of the new card ###
 
         ### Set the web page from where to extract the links ###
-        $question = new Question("Please enter the url from where to extract the links: ");
+        $question = new Question(
+            "Please enter the url from where to extract the links: "
+        );
         $url = $helper->ask($input, $output, $question);
         ### End Set the web page from where to extract the links ###
 
         ### Narrow dow the section from where to extract the links ###
-        $question = new Question("Please enter a selector to narrow down the link extraction: ", "");
+        $question = new Question(
+            "Please enter a selector to narrow down the link extraction: ",
+            ""
+        );
         $selector = $helper->ask($input, $output, $question);
         ### Narrow dow the section from where to extract the links ###
 
         $links = $this->webCrawler->extractLinksFrom($url, $selector);
 
-        $newCard = $this->trelloApi->createCard($newCardName, $boardLists[$listName]["id"]);
+        $newCard = $this->trelloApi->createCard(
+            $newCardName,
+            $boardLists[$listName]["id"]
+        );
         $newChecklist = $this->trelloApi->createChecklist($newCard["id"]);
 
         $this->createCheckItems($links, $newChecklist["id"], $output);
@@ -99,13 +107,20 @@ class CreateLinkCardCommand extends Command
         return 0;
     }
 
-    private function createCheckItems(array $links, $idCheckList, OutputInterface $output)
-    {
+    private function createCheckItems(
+        array $links,
+        $idCheckList,
+        OutputInterface $output
+    ) {
         $progressBar = new ProgressBar($output, count($links));
         $progressBar->start();
 
         foreach ($links as $link) {
-            $this->trelloApi->createCheckItems($idCheckList, $link['text'], $link['href']);
+            $this->trelloApi->createCheckItems(
+                $idCheckList,
+                $link["text"],
+                $link["href"]
+            );
             $progressBar->advance();
         }
 
